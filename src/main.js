@@ -36,6 +36,7 @@ import {
     Tooltip
 } from "primevue";
 import router from "./router.js";
+import pinia from "./pinia.js";
 
 // noinspection JSCheckFunctionSignatures
 createApp(App)
@@ -69,4 +70,5 @@ createApp(App)
     .component('pv-toast',          Toast)
     .directive('tooltip',           Tooltip)
     .use(router)
+    .use(pinia)
     .mount('#app')
