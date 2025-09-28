@@ -1,5 +1,5 @@
 /**
- * Pinia store for managing categories and tutorials in the publishing bounded context.
+ * Pinia store for managing categories and tutorials in the publishing context.
  * Encapsulates all CRUD operations and state management for categories and tutorials.
  *
  * @module usePublishingStore
@@ -214,5 +214,28 @@ const usePublishingStore = defineStore('publishing', () => {
             if (category) tutorial.category = category;
         });
     }
+
+    return {
+        categories,
+        tutorials,
+        errors,
+        categoriesLoaded,
+        tutorialsLoaded,
+        categoriesCount,
+        tutorialsCount,
+        fetchCategories,
+        fetchTutorials,
+        addCategory,
+        updateCategory,
+        deleteCategory,
+        getCategoryById,
+        addTutorial,
+        updateTutorial,
+        deleteTutorial,
+        getTutorialById,
+        setCategoriesForTutorials
+    }
 });
+
+export default usePublishingStore;
 
