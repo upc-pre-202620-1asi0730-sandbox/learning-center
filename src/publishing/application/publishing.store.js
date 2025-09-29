@@ -22,12 +22,12 @@ const usePublishingStore = defineStore('publishing', () => {
      * List of category entities.
      * @type {import('vue').Ref<Category[]>}
      */
-    const categories = ref([Category]);
+    const categories = ref([]);
     /**
      * List of tutorial entities.
      * @type {import('vue').Ref<Tutorial[]>}
      */
-    const tutorials = ref([Tutorial]);
+    const tutorials = ref([]);
     /**
      * List of errors encountered during API operations.
      * @type {import('vue').Ref<Error[]>}
@@ -67,6 +67,8 @@ const usePublishingStore = defineStore('publishing', () => {
         publishingApi.getCategories().then(response => {
             categories.value = CategoryAssembler.toEntitiesFromResponse(response);
             categoriesLoaded.value = true;
+            console.log(categoriesLoaded.value);
+            console.log(categories.value);
         }).catch(error => {
             errors.value.push(error);
         });
@@ -81,7 +83,6 @@ const usePublishingStore = defineStore('publishing', () => {
         publishingApi.getTutorials().then(response => {
             tutorials.value = TutorialAssembler.toEntitiesFromResponse(response);
             tutorialsLoaded.value = true;
-            if(categoriesLoaded.value) setCategoriesForTutorials();
         }).catch(error => {
             errors.value.push(error);
         });
@@ -127,7 +128,7 @@ const usePublishingStore = defineStore('publishing', () => {
      * @returns {void}
      */
     function deleteCategory(category) {
-        publishingApi.deleteCategory(category).then(() => {
+        publishingApi.deleteCategory(category.id).then(() => {
             const index = categories.value.findIndex(c => c["id"] === category.id);
             if (index !== -1) categories.value.splice(index, 1);
         }).catch(error => {
@@ -135,15 +136,6 @@ const usePublishingStore = defineStore('publishing', () => {
         });
     }
 
-    /**
-     * Gets a category by its ID.
-     * @function
-     * @param {number|string} id - The category ID.
-     * @returns {Category|undefined} The found category or undefined.
-     */
-    function getCategoryById(id) {
-        return categories.value.find(category => category["id"] === id);
-    }
 
     /**
      * Adds a new tutorial via the API and updates state.
@@ -185,7 +177,7 @@ const usePublishingStore = defineStore('publishing', () => {
      * @returns {void}
      */
     function deleteTutorial(tutorial) {
-        publishingApi.deleteTutorial(tutorial).then(() => {
+        publishingApi.deleteTutorial(tutorial.id).then(() => {
             const index = tutorials.value.findIndex(t => t["id"] === tutorial.id);
             if (index !== -1) tutorials.value.splice(index, 1);
         }).catch(error => {
@@ -203,17 +195,6 @@ const usePublishingStore = defineStore('publishing', () => {
         return tutorials.value.find(tutorial => tutorial["id"] === id);
     }
 
-    /**
-     * Sets the category object for each tutorial based on its categoryId.
-     * @function
-     * @returns {void}
-     */
-    function setCategoriesForTutorials() {
-        tutorials.value.forEach(tutorial => {
-            const category = getCategoryById(tutorial["categoryId"]);
-            if (category) tutorial.category = category;
-        });
-    }
 
     return {
         categories,
@@ -228,12 +209,10 @@ const usePublishingStore = defineStore('publishing', () => {
         addCategory,
         updateCategory,
         deleteCategory,
-        getCategoryById,
         addTutorial,
         updateTutorial,
         deleteTutorial,
-        getTutorialById,
-        setCategoriesForTutorials
+        getTutorialById
     }
 });
 
