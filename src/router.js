@@ -1,6 +1,6 @@
 import {createRouter, createWebHistory} from "vue-router";
 import Home from "./shared/presentation/views/home.vue";
-import publishingRoutes from "./publishing/presentations/publishing-routes.js";
+import publishingRoutes from "./publishing/presentation/publishing-routes.js";
 
 // TODO: Define lazy-loaded components for routes
 const about = () => import('./shared/presentation/views/about.vue');
