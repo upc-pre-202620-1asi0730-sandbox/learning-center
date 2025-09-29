@@ -13,10 +13,7 @@ const { tutorials, tutorialsLoaded, errors, fetchTutorials, deleteTutorial, fetc
 
 onMounted(() => {
   if (!tutorialsLoaded) fetchTutorials();
-  if (!store.categoriesLoaded) {
-    fetchCategories();
-    setCategoriesForTutorials();
-  }
+  console.log(tutorials);
 });
 
 const navigateToNew = () => {
@@ -24,6 +21,7 @@ const navigateToNew = () => {
 };
 
 const navigateToEdit = (id) => {
+  console.log(id);
   router.push({ name: 'publishing-tutorial-edit', params: { id } });
 };
 
@@ -53,7 +51,7 @@ const confirmDelete = (tutorial) => {
       <pv-column field="id" :header="t('tutorials.id')" sortable />
       <pv-column field="title" :header="t('tutorials.title')" sortable />
       <pv-column field="summary" :header="t('tutorials.summary')" />
-      <pv-column field="category.name" :header="t('tutorials.category')" />
+      <pv-column field="categoryId" :header="t('tutorials.category-id')" />
       <pv-column :header="t('tutorials.actions')">
         <template #body="slotProps">
           <pv-button icon="pi pi-pencil" text rounded @click="navigateToEdit(slotProps.data.id)" />
