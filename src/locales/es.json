@@ -43,7 +43,7 @@
     "title": "Tutoriales",
     "id": "ID",
     "summary": "Resumen",
-    "category": "Categoría",
+    "category-id": "ID de Categoría",
     "actions": "Acciones",
     "new": "Nuevo Tutorial",
     "confirm-delete": "¿Estás seguro de que quieres eliminar {title}?",

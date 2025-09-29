@@ -43,7 +43,7 @@
     "title": "Tutorials",
     "id": "ID",
     "summary": "Summary",
-    "category": "Category",
+    "category-id": "Category ID",
     "actions": "Actions",
     "new": "New Tutorial",
     "confirm-delete": "Are you sure you want to delete {title}?",
