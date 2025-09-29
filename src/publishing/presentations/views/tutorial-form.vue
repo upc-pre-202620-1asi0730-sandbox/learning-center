@@ -9,7 +9,7 @@ const {t} = useI18n();
 const route = useRoute();
 const router = useRouter();
 const store = usePublishingStore();
-const {errors, categories, getTutorialById, addTutorial, updateTutorial, fetchCategories} = store;
+const {errors, categories, addTutorial, updateTutorial, fetchCategories} = store;
 
 const form = ref({title: '', summary: '', categoryId: null});
 const isEdit = computed(() => !!route.params.id);
@@ -25,6 +25,10 @@ onMounted(() => {
     } else router.push({name: 'publishing-tutorials'});
   }
 });
+
+const getTutorialById = (id) => {
+  return store.tutorials.find(t => t.id === id);
+};
 
 const saveTutorial = () => {
   const tutorial = new Tutorial({
