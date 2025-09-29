@@ -9,17 +9,23 @@ const {t} = useI18n();
 const route = useRoute();
 const router = useRouter();
 const store = usePublishingStore();
-const {errors, getCategoryById, addCategory, updateCategory} = store;
+const {errors, addCategory, updateCategory} = store;
 
 const form = ref({name: ''});
 const isEdit = computed(() => !!route.params.id);
 
 onMounted(() => {
+  console.log(route.params.id);
   if (isEdit.value) {
     const category = getCategoryById(route.params.id);
+    console.log(category);
     if (category) form.value.name = category.name; else router.push({name: 'publishing-categories'});
   }
 });
+
+const getCategoryById = (id) => {
+  return store.categories.find(c => c.id === id);
+};
 
 const saveCategory = () => {
   const category = new Category({
