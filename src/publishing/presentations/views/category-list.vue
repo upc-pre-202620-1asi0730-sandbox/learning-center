@@ -13,6 +13,7 @@ const {categories, categoriesLoaded, errors, fetchCategories, deleteCategory} = 
 
 onMounted(() => {
   if (!categoriesLoaded) fetchCategories();
+  console.log(categories);
 });
 
 const navigateToNew = () => {
