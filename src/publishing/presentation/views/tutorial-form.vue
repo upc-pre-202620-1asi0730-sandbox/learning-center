@@ -26,8 +26,8 @@ onMounted(() => {
   }
 });
 
-const getTutorialById = (id) => {
-  return store.tutorials.find(t => t.id === id);
+function getTutorialById(id) {
+  return store.getTutorialById(id);
 };
 
 const saveTutorial = () => {
