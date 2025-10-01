@@ -25,7 +25,7 @@ onMounted(() => {
 
 function getCategoryById(id) {
   return store.getCategoryById(id);
-};
+}
 
 const saveCategory = () => {
   const category = new Category({
