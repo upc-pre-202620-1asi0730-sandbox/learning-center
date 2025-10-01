@@ -23,8 +23,8 @@ onMounted(() => {
   }
 });
 
-const getCategoryById = (id) => {
-  return store.categories.find(c => c.id === id);
+function getCategoryById(id) {
+  return store.getCategoryById(id);
 };
 
 const saveCategory = () => {
