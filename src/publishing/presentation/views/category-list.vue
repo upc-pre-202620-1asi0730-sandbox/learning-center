@@ -42,12 +42,12 @@ const confirmDelete = (category) => {
     <pv-button :label="t('categories.new')" class="mb-3" icon="pi pi-plus" @click="navigateToNew"/>
     <pv-data-table
         :loading="!categoriesLoaded"
-        :rows="10"
-        :rowsPerPageOptions="[5, 10, 20]"
+        :rows="5"
+        :rows-per-page-options="[5, 10, 20]"
         :value="categories"
         paginator
-        stripedRows
-        tableStyle="min-width: 50rem">
+        striped-rows
+        table-style="min-width: 50rem">
       <pv-column :header="t('categories.id')" field="id" sortable/>
       <pv-column :header="t('categories.name')" field="name" sortable/>
       <pv-column :header="t('categories.actions')">
