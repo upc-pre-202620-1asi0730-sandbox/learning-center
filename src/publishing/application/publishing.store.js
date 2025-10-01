@@ -89,6 +89,17 @@ const usePublishingStore = defineStore('publishing', () => {
     }
 
     /**
+     * Gets a category by its ID.
+     * @function
+     * @param id {number|string} id - The category ID.
+     * @returns {Category} The found category or undefined.
+     */
+    function getCategoryById(id) {
+        let idNum = parseInt(id);
+        return categories.value.find(category => category["id"] === idNum);
+    }
+
+    /**
      * Adds a new category via the API and updates state.
      * @function
      * @param {Category} category - The category to add.
@@ -138,6 +149,17 @@ const usePublishingStore = defineStore('publishing', () => {
 
 
     /**
+     * Gets a tutorial by its ID.
+     * @function
+     * @param id {number|string} id - The tutorial ID.
+     * @returns {Tutorial} The found tutorial or undefined.
+     */
+    function getTutorialById(id) {
+        let idNum = parseInt(id);
+        return tutorials.value.find(tutorial => tutorial["id"] === idNum);
+    }
+
+    /**
      * Adds a new tutorial via the API and updates state.
      * @function
      * @param {Tutorial} tutorial - The tutorial to add.
@@ -185,17 +207,6 @@ const usePublishingStore = defineStore('publishing', () => {
         });
     }
 
-    /**
-     * Gets a tutorial by its ID.
-     * @function
-     * @param {number|string} id - The tutorial ID.
-     * @returns {Tutorial|undefined} The found tutorial or undefined.
-     */
-    function getTutorialById(id) {
-        return tutorials.value.find(tutorial => tutorial["id"] === id);
-    }
-
-
     return {
         categories,
         tutorials,
@@ -206,6 +217,7 @@ const usePublishingStore = defineStore('publishing', () => {
         tutorialsCount,
         fetchCategories,
         fetchTutorials,
+        getCategoryById,
         addCategory,
         updateCategory,
         deleteCategory,
