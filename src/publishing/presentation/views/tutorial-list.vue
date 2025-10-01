@@ -42,11 +42,11 @@ const confirmDelete = (tutorial) => {
     <pv-data-table
         :value="tutorials"
         :loading="!tutorialsLoaded"
-        stripedRows
-        tableStyle="min-width: 50rem"
+        striped-rows
+        table-style="min-width: 50rem"
         paginator
-        :rows="10"
-        :rowsPerPageOptions="[5, 10, 20]"
+        :rows="5"
+        :rows-per-page-options="[5, 10, 20]"
     >
       <pv-column field="id" :header="t('tutorials.id')" sortable />
       <pv-column field="title" :header="t('tutorials.title')" sortable />
