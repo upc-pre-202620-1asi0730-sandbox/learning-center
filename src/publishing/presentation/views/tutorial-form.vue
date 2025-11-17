@@ -26,11 +26,20 @@ onMounted(() => {
   }
 });
 
+/**
+ * Retrieves a tutorial by its ID.
+ * @param {string} id - The ID of the tutorial.
+ * @returns {Object|null} - The tutorial object if found, null otherwise.
+ */
 function getTutorialById(id) {
   return store.getTutorialById(id);
 }
 
 const saveTutorial = () => {
+  /**
+   * Saves the tutorial.
+   * If editing an existing tutorial, updates it; otherwise, adds a new tutorial.
+   */
   const tutorial = new Tutorial({
     id: isEdit.value ? route.params.id : null,
     title: form.value.title,
@@ -41,6 +50,9 @@ const saveTutorial = () => {
   navigateBack();
 };
 
+/**
+ * Navigates back to the tutorials list.
+ */
 const navigateBack = () => {
   router.push({name: 'publishing-tutorials'});
 };
