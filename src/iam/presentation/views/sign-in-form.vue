@@ -6,7 +6,7 @@
 
   const router = useRouter();
   const store = useIamStore();
-  const {signIn, errors} = store;
+  const {signIn} = store;
   const form = reactive({
     username: '',
     password: ''
@@ -20,7 +20,7 @@
   function performSignIn() {
     let signInCommand = new SignInCommand(form);
     console.log(signInCommand);
-    store.signIn(signInCommand, router);
+    signIn(signInCommand, router);
   }
 </script>
 

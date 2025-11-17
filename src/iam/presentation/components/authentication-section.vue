@@ -1,12 +1,11 @@
 <script setup>
 import useIamStore from "../../application/iam.store.js";
-import {storeToRefs} from "pinia";
 import {useRouter} from "vue-router";
 import {computed} from "vue";
 
 const router = useRouter();
 const store = useIamStore();
-const {signOut} = storeToRefs(store);
+const {signOut} = store;
 
 let isSignedIn = computed(() => !!store.isSignedIn);
 let currentUsername = computed(() => store.currentUsername);

@@ -6,7 +6,7 @@ import {useRouter} from "vue-router";
 
 const router = useRouter();
 const store = useIamStore();
-const {signUp, errors} = store;
+const {signUp} = store;
 const form = reactive({
   username: '',
   password: ''
