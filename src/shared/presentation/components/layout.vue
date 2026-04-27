@@ -40,7 +40,8 @@ const items = [
             <router-link :to="item.to" :class="slotProps['class']">{{ t(item.label) }}</router-link>
           </pv-button>
         </div>
-        <authentication-section/>
+        <!-- To add when IAM is implemented -->
+        <!-- <authentication-section/> -->
         <language-switcher/>
       </template>
     </pv-toolbar>
