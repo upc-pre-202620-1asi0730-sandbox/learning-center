@@ -3,17 +3,20 @@ import {useI18n} from "vue-i18n";
 import {useRouter} from "vue-router";
 import {useConfirm} from "primevue";
 import usePublishingStore from "../../application/publishing.store.js";
-import {onMounted} from "vue";
+import {onMounted, toRefs} from "vue";
 
 const { t } = useI18n();
 const router = useRouter();
 const confirm = useConfirm();
 const store = usePublishingStore();
-const { tutorials, tutorialsLoaded, errors, fetchTutorials, deleteTutorial, fetchCategories, setCategoriesForTutorials } = store;
+const { tutorials, tutorialsLoaded, errors} = toRefs(store);
+const { fetchTutorials, deleteTutorial } = store;
 
 onMounted(() => {
-  if (!tutorialsLoaded) fetchTutorials();
-  console.log(tutorials);
+  if (!store.tutorialsLoaded) {
+    fetchTutorials();
+    tutorialsLoaded.value = store.tutorialsLoaded;
+  }
 });
 
 /**
