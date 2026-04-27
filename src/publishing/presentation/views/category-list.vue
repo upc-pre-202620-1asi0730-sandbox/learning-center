@@ -3,7 +3,7 @@ import {useI18n} from "vue-i18n";
 import {useRouter} from "vue-router";
 import {useConfirm} from "primevue";
 import usePublishingStore from "../../application/publishing.store.js";
-import {onMounted, ref, toRefs} from "vue";
+import {onMounted, toRefs} from "vue";
 
 const {t} = useI18n();
 const router = useRouter();
