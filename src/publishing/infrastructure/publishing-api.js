@@ -5,14 +5,10 @@ const categoriesEndpointPath    = import.meta.env.VITE_CATEGORIES_ENDPOINT_PATH;
 const tutorialsEndpointPath     = import.meta.env.VITE_TUTORIALS_ENDPOINT_PATH;
 
 /**
- * PublishingApi class to handle API operations for Publishing context.
- * Extends BaseApi and provides CRUD operations for categories and tutorials.
+ * Infrastructure gateway for Publishing bounded-context endpoints.
  *
- * @class
+ * @class PublishingApi
  * @extends BaseApi
- * @example
- * const publishingApi = new PublishingApi();
- * publishingApi.getCategories().then(response => console.log(response.data));
  */
 export class PublishingApi extends BaseApi {
     /**
@@ -26,9 +22,7 @@ export class PublishingApi extends BaseApi {
      */
     #tutorialsEndpoint;
 
-    /**
-     * Initializes endpoints for categories and tutorials.
-     */
+    /** Creates endpoint clients for categories and tutorials. */
     constructor() {
         super();
         this.#categoriesEndpoint = new BaseEndpoint(this, categoriesEndpointPath);
@@ -53,8 +47,8 @@ export class PublishingApi extends BaseApi {
     }
 
     /**
-     * Creates a new category.
-     * @param {Object} resource - The category data to create.
+     * Creates a category resource.
+     * @param {Object} resource - Category resource payload.
      * @returns {Promise<import('axios').AxiosResponse>} Promise resolving to the created category response.
      */
     createCategory(resource) {
@@ -62,8 +56,8 @@ export class PublishingApi extends BaseApi {
     }
 
     /**
-     * Updates an existing category.
-     * @param {Object} resource - The category data to update (must include id).
+     * Updates a category resource.
+     * @param {Object} resource - Category resource payload (must include id).
      * @returns {Promise<import('axios').AxiosResponse>} Promise resolving to the updated category response.
      */
     updateCategory(resource) {
@@ -97,8 +91,8 @@ export class PublishingApi extends BaseApi {
     }
 
     /**
-     * Creates a new tutorial.
-     * @param {Object} resource - The tutorial data to create.
+     * Creates a tutorial resource.
+     * @param {Object} resource - Tutorial resource payload.
      * @returns {Promise<import('axios').AxiosResponse>} Promise resolving to the created tutorial response.
      */
     createTutorial(resource) {
@@ -106,8 +100,8 @@ export class PublishingApi extends BaseApi {
     }
 
     /**
-     * Updates an existing tutorial.
-     * @param {Object} resource - The tutorial data to update (must include id).
+     * Updates a tutorial resource.
+     * @param {Object} resource - Tutorial resource payload (must include id).
      * @returns {Promise<import('axios').AxiosResponse>} Promise resolving to the updated tutorial response.
      */
     updateTutorial(resource) {

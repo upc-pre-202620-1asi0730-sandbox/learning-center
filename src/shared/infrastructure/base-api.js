@@ -4,11 +4,9 @@ import {iamInterceptor} from "../../iam/infrastructure/iam.interceptor.js";
 const platformApi = import.meta.env.VITE_LEARNING_PLATFORM_API_URL;
 
 /**
- * Base API class to handle HTTP requests using Axios
- * @class
- * @example
- * const api = new BaseApi();
- * api.http.get('/endpoint').then(response => console.log(response.data));
+ * Shared infrastructure base class that configures the HTTP client.
+ *
+ * @class BaseApi
  */
 export class BaseApi {
     /**
@@ -34,8 +32,8 @@ export class BaseApi {
     }
 
     /**
-     * Gets the Axios HTTP client instance
-     * @returns {axios.AxiosInstance}
+     * Returns the configured Axios HTTP client.
+     * @returns {import('axios').AxiosInstance}
      */
     get http() {
         return this.#http;

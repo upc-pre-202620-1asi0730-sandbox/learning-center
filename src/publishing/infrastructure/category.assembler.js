@@ -1,26 +1,24 @@
 import {Category} from "../domain/model/category.entity.js";
 
 /**
- * Assembler for converting API resources to Category entities.
- * @class
+ * Maps publishing category resources into domain entities.
+ *
+ * @class CategoryAssembler
  */
 export class CategoryAssembler {
     /**
-     * Converts a plain resource object to a Category entity.
-     * @param {Object} resource - The resource object representing a category.
-     * @returns {Category} The corresponding Category entity.
+     * @param {Object} resource - Category resource payload.
+     * @returns {Category} Category entity.
      */
     static toEntityFromResource(resource) {
         return new Category({...resource})
     }
 
     /**
-     * Converts an API response to an array of Category entities.
-     * Handles both array and object response formats.
-     * Logs an error and returns an empty array if the response status is not 200.
+     * Parses category resources from a response and maps them into entities.
      *
-     * @param {import('axios').AxiosResponse} response - The API response containing category data.
-     * @returns {Category[]} Array of Category entities.
+     * @param {import('axios').AxiosResponse<Array<Object>|Object>} response - HTTP response with category resources.
+     * @returns {Category[]} Category entities.
      */
     static toEntitiesFromResponse(response) {
         if (response.status !== 200) {

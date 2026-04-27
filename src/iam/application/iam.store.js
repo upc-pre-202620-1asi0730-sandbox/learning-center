@@ -9,9 +9,10 @@ import {SignUpCommand} from "../domain/sign-up.command.js";
 
 const iamApi = new IamApi();
 /**
- * Pinia store for managing Identity and Access Management (IAM) state.
- * Handles user authentication, registration, and user data fetching.
- * @returns {Object} The store object with state and actions.
+ * Application service store for the IAM bounded context.
+ * It coordinates authentication commands and exposes UI-facing auth state.
+ *
+ * @returns {Object} Store state and actions.
  */
 const useIamStore = defineStore('iam', () => {
     /** @type {import('vue').Ref<Array<User>>} Array of user entities. */
@@ -30,12 +31,10 @@ const useIamStore = defineStore('iam', () => {
     const currentToken = computed(() => isSignedIn.value ? localStorage.getItem('token') : null);
 
     /**
-     * Signs in a user with the provided credentials.
-     * @param {SignInCommand} signInCommand - The sign-in command object.
-     * @param {Object} router - The Vue router instance for navigation.
-     * @param {string} signInCommand.username - The username.
-     * @param {string} signInCommand.password - The password.
-     * @throws {Error} If the sign-in fails.
+     * Executes the sign-in use case and updates authentication state.
+     * @param {SignInCommand} signInCommand - Sign-in command.
+     * @param {import('vue-router').Router} router - Router used to redirect on result.
+     * @returns {void}
      */
     function signIn(signInCommand, router) {
         // Implementation for sign-in action
@@ -70,13 +69,10 @@ const useIamStore = defineStore('iam', () => {
     }
 
     /**
-     * Signs up a new user with the provided details.
-     * @param {SignUpCommand} signUpCommand - The sign-up command object.
-     * @param {Object} router - The Vue router instance for navigation.
-     * @param {string} signUpCommand.username - The username.
-     * @param {string} signUpCommand.password - The password.
-     * @param {string} signUpCommand.email - The email.
-     * @throws {Error} If the sign-up fails.
+     * Executes the sign-up use case and routes the user to the next screen.
+     * @param {SignUpCommand} signUpCommand - Sign-up command.
+     * @param {import('vue-router').Router} router - Router used to redirect on result.
+     * @returns {void}
      */
     function signUp(signUpCommand, router) {
         // Implementation for sign-up action
@@ -100,9 +96,7 @@ const useIamStore = defineStore('iam', () => {
             });
     }
 
-    /**
-     * Signs out the current user.
-     */
+    /** Clears the active IAM session and local auth artifacts. */
     function signOut() {
         currentUsername.value = null;
         currentUserId.value = 0;
@@ -113,8 +107,8 @@ const useIamStore = defineStore('iam', () => {
     }
 
     /**
-     * Fetches all users from the API.
-     * @throws {Error} If fetching users fails.
+     * Loads user entities from infrastructure.
+     * @returns {void}
      */
     function fetchUsers() {
         iamApi.getUsers().then(response => {

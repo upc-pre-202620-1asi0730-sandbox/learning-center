@@ -1,20 +1,20 @@
 import {Category} from "./category.entity.js";
 
 /**
- * Represents a Tutorial entity.
- * @class
+ * Tutorial entity within the Publishing bounded context.
+ *
+ * @class Tutorial
  */
 export class Tutorial {
 
 
     /**
-     * Creates a new Tutorial instance.
-     * @param {Object} params - The parameters for the tutorial.
-     * @param {?number} [params.id=null] - The unique identifier for the tutorial.
-     * @param {string} [params.title=''] - The title of the tutorial.
-     * @param {string} [params.summary=''] - The summary of the tutorial.
-     * @param {?number} [params.categoryId=null] - The category ID associated with the tutorial.
-     * @param {?Category} [params.category=null] - The Category instance associated with the tutorial.
+     * @param {Object} params - Entity attributes.
+     * @param {?number} [params.id=null] - Tutorial identifier.
+     * @param {string} [params.title=''] - Tutorial title.
+     * @param {string} [params.summary=''] - Tutorial abstract shown in listings.
+     * @param {?number} [params.categoryId=null] - Foreign key of the related category.
+     * @param {?Category} [params.category=null] - Optional category entity reference.
      */
     constructor({ id = null, title = '', summary = '', categoryId = null, category = null }) {
         this.id = id;

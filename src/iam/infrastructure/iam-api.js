@@ -5,18 +5,17 @@ const signUpEndpointPath = import.meta.env.VITE_SIGNUP_ENDPOINT_PATH;
 const usersEndpointPath   = import.meta.env.VITE_USERS_ENDPOINT_PATH;
 
 /**
+ * Infrastructure gateway for IAM bounded-context endpoints.
+ *
  * @class IamApi
  * @extends BaseApi
- * @summary API class for Identity and Access Management operations.
  */
 export class IamApi extends BaseApi {
     #signInEndpoint;
     #signUpEndpoint;
     #usersEndpoint;
 
-    /**
-     * @constructor
-     */
+    /** Creates endpoint clients for sign-in, sign-up, and user listing. */
     constructor() {
         super();
         this.#signInEndpoint = new BaseEndpoint(this, signInEndpointPath);
@@ -25,23 +24,26 @@ export class IamApi extends BaseApi {
     }
 
     /**
-     * @param {Object} signInRequest - The sign-in request data.
-     * @returns {Promise} A promise that resolves with the sign-in response.
+     * Sends a sign-in command to the authentication endpoint.
+     * @param {import('../domain/sign-in.command.js').SignInCommand} signInRequest - Sign-in command.
+     * @returns {Promise<import('axios').AxiosResponse<Object>>} HTTP response with authentication payload.
      */
     signIn(signInRequest) {
         return this.#signInEndpoint.create(signInRequest);
     }
 
     /**
-     * @param {Object} signUpRequest - The sign-up request data.
-     * @returns {Promise} A promise that resolves with the sign-up response.
+     * Sends a sign-up command to the registration endpoint.
+     * @param {import('../domain/sign-up.command.js').SignUpCommand} signUpRequest - Sign-up command.
+     * @returns {Promise<import('axios').AxiosResponse<Object>>} HTTP response with registration payload.
      */
     signUp(signUpRequest) {
         return this.#signUpEndpoint.create(signUpRequest);
     }
 
     /**
-     * @returns {Promise} A promise that resolves with the list of users.
+     * Retrieves users visible to the IAM context.
+     * @returns {Promise<import('axios').AxiosResponse<Array<Object>|Object>>} HTTP response with user resources.
      */
     getUsers() {
         return this.#usersEndpoint.getAll();

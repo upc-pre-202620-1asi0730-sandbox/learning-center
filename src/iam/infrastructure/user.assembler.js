@@ -1,26 +1,22 @@
 import {User} from "../domain/user.entity.js";
 
 /**
+ * Maps IAM infrastructure resources into domain entities.
+ *
  * @class UserAssembler
- * @summary Assembler for converting user resources to entities.
  */
 export class UserAssembler {
     /**
-     * @static
-     * @param {Object} resource - The user resource.
-     * @returns {User} The User entity.
+     * @param {Object} resource - User resource payload.
+     * @returns {User} User entity.
      */
     static toEntityFromResource(resource) {
         return new User({...resource});
     }
     
     /**
-     * @static
-     * @param {Object} response - The API response object.
-     * @param {number} response.status - The HTTP status code.
-     * @param {string} response.statusText - The status text.
-     * @param {Array|Object} response.data - The response data.
-     * @returns {User[]} Array of User entities.
+     * @param {import('axios').AxiosResponse<Array<Object>|Object>} response - HTTP response containing user resources.
+     * @returns {User[]} Collection of user entities.
      */
     static toEntitiesFromResponse(response) {
         if (response.status !== 200) {

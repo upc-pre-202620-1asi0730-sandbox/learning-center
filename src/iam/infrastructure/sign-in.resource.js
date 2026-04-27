@@ -1,12 +1,14 @@
 /**
+ * Infrastructure resource returned by the authentication endpoint.
+ *
  * @class SignInResource
- * @summary Resource representing sign-in data.
  */
 export class SignInResource {
     /**
-     * @param {string|number} id - The user ID.
-     * @param {string} username - The username.
-     * @param {string} token - The authentication token.
+     * @param {Object} params - Resource payload.
+     * @param {string|number} params.id - Authenticated user identifier.
+     * @param {string} params.username - Authenticated username.
+     * @param {string} params.token - Bearer token.
      */
     constructor({id, username, token}) {
         this.id = id;

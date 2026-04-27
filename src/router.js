@@ -35,13 +35,12 @@ const router = createRouter({
 });
 
 /**
- * Navigation guard that is called before each route change.
- * It sets the document title based on the target route's meta information
- * and can be used to implement authentication or other guards.
+ * Global navigation guard that updates the document title and delegates auth when enabled.
  *
- * @param {Object} to - The target Route Object being navigated to.
- * @param {Object} from - The current Route Object being navigated away from.
- * @param {Function} next - A function that must be called to resolve the hook.
+ * @param {import('vue-router').RouteLocationNormalized} to - Target route.
+ * @param {import('vue-router').RouteLocationNormalized} from - Previous route.
+ * @param {import('vue-router').NavigationGuardNext} next - Guard continuation callback.
+ * @returns {void}
  */
 router.beforeEach((to, from, next) => {
     console.log(`Navigating from ${from.name} to ${to.name}`);

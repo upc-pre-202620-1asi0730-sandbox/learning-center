@@ -1,6 +1,6 @@
 /**
- * Pinia store for managing categories and tutorials in the publishing context.
- * Encapsulates all CRUD operations and state management for categories and tutorials.
+ * Application service store for the Publishing bounded context.
+ * It coordinates category and tutorial use cases and keeps UI-facing state.
  *
  * @module usePublishingStore
  */
@@ -15,7 +15,9 @@ import {Tutorial} from "../domain/model/tutorial.entity.js";
 const publishingApi = new PublishingApi();
 
 /**
- * Store for publishing context.
+ * Reactive store that exposes Publishing commands and queries.
+ *
+ * @returns {Object} Store state and actions.
  */
 const usePublishingStore = defineStore('publishing', () => {
     /**
@@ -59,8 +61,7 @@ const usePublishingStore = defineStore('publishing', () => {
     });
 
     /**
-     * Fetches categories from the API and updates state.
-     * @function
+     * Loads categories from infrastructure and updates the application state.
      * @returns {void}
      */
     function fetchCategories() {
@@ -75,8 +76,7 @@ const usePublishingStore = defineStore('publishing', () => {
     }
 
     /**
-     * Fetches tutorials from the API and updates state.
-     * @function
+     * Loads tutorials from infrastructure and updates the application state.
      * @returns {void}
      */
     function fetchTutorials() {
@@ -89,10 +89,9 @@ const usePublishingStore = defineStore('publishing', () => {
     }
 
     /**
-     * Gets a category by its ID.
-     * @function
-     * @param id {number|string} id - The category ID.
-     * @returns {Category} The found category or undefined.
+     * Finds a category entity by identifier.
+     * @param {number|string} id - Category identifier.
+     * @returns {Category|undefined} Matching category, if available.
      */
     function getCategoryById(id) {
         let idNum = parseInt(id);
@@ -100,9 +99,8 @@ const usePublishingStore = defineStore('publishing', () => {
     }
 
     /**
-     * Adds a new category via the API and updates state.
-     * @function
-     * @param {Category} category - The category to add.
+     * Creates a category through infrastructure and appends it to local state.
+     * @param {Category} category - Category entity to persist.
      * @returns {void}
      */
     function addCategory(category) {
@@ -116,9 +114,8 @@ const usePublishingStore = defineStore('publishing', () => {
     }
 
     /**
-     * Updates an existing category via the API and updates state.
-     * @function
-     * @param {Category} category - The category to update.
+     * Updates an existing category and synchronizes local state.
+     * @param {Category} category - Category entity with updated data.
      * @returns {void}
      */
     function updateCategory(category) {
@@ -133,9 +130,8 @@ const usePublishingStore = defineStore('publishing', () => {
     }
 
     /**
-     * Deletes a category via the API and updates state.
-     * @function
-     * @param {Category} category - The category to delete.
+     * Deletes a category and removes it from local state.
+     * @param {Category} category - Category entity to remove.
      * @returns {void}
      */
     function deleteCategory(category) {
@@ -149,10 +145,9 @@ const usePublishingStore = defineStore('publishing', () => {
 
 
     /**
-     * Gets a tutorial by its ID.
-     * @function
-     * @param id {number|string} id - The tutorial ID.
-     * @returns {Tutorial} The found tutorial or undefined.
+     * Finds a tutorial entity by identifier.
+     * @param {number|string} id - Tutorial identifier.
+     * @returns {Tutorial|undefined} Matching tutorial, if available.
      */
     function getTutorialById(id) {
         let idNum = parseInt(id);
@@ -160,9 +155,8 @@ const usePublishingStore = defineStore('publishing', () => {
     }
 
     /**
-     * Adds a new tutorial via the API and updates state.
-     * @function
-     * @param {Tutorial} tutorial - The tutorial to add.
+     * Creates a tutorial through infrastructure and appends it to local state.
+     * @param {Tutorial} tutorial - Tutorial entity to persist.
      * @returns {void}
      */
     function addTutorial(tutorial) {
@@ -176,9 +170,8 @@ const usePublishingStore = defineStore('publishing', () => {
     }
 
     /**
-     * Updates an existing tutorial via the API and updates state.
-     * @function
-     * @param {Tutorial} tutorial - The tutorial to update.
+     * Updates an existing tutorial and synchronizes local state.
+     * @param {Tutorial} tutorial - Tutorial entity with updated data.
      * @returns {void}
      */
     function updateTutorial(tutorial) {
@@ -193,9 +186,8 @@ const usePublishingStore = defineStore('publishing', () => {
     }
 
     /**
-     * Deletes a tutorial via the API and updates state.
-     * @function
-     * @param {Tutorial} tutorial - The tutorial to delete.
+     * Deletes a tutorial and removes it from local state.
+     * @param {Tutorial} tutorial - Tutorial entity to remove.
      * @returns {void}
      */
     function deleteTutorial(tutorial) {

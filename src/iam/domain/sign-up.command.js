@@ -1,13 +1,13 @@
 /**
- * Sign up Command
- * @summary
- * Represents a sign-up command. This is used to register a user.
+ * Command used by the IAM application layer to register a new user.
+ *
+ * @class SignUpCommand
  */
 export class SignUpCommand {
     /**
-     * Constructor
-     * @param {string} username The username of the user.
-     * @param {string} password The password of the user.
+     * @param {Object} params - Command attributes.
+     * @param {string} params.username - Desired username.
+     * @param {string} params.password - Desired password.
      */
     constructor({username, password}) {
         this.username = username;

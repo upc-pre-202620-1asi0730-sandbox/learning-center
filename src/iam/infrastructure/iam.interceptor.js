@@ -1,9 +1,10 @@
 import useIamStore from "../application/iam.store.js";
 
 /**
- * Axios interceptor to add IAM authentication token to request headers.
- * @param {Object} config - Axios request configuration object.
- * @returns {Object} Modified Axios request configuration with Authorization header if signed in.
+ * Adds the IAM bearer token to outbound requests when a user is authenticated.
+ *
+ * @param {import('axios').InternalAxiosRequestConfig} config - Axios request configuration.
+ * @returns {import('axios').InternalAxiosRequestConfig} Updated request configuration.
  */
 export const iamInterceptor = (config) => {
     const store = useIamStore();

@@ -1,17 +1,14 @@
 import {SignUpResource} from "./sign-up.resource.js";
 
 /**
+ * Maps registration endpoint responses into IAM infrastructure resources.
+ *
  * @class SignUpAssembler
- * @summary Assembler for converting sign-up API responses to resources.
  */
 export class SignUpAssembler {
     /**
-     * @static
-     * @param {Object} response - The API response object.
-     * @param {number} response.status - The HTTP status code.
-     * @param {string} response.statusText - The status text.
-     * @param {Object} response.data - The response data.
-     * @returns {SignUpResource|null} The assembled SignUpResource or null if error.
+     * @param {import('axios').AxiosResponse<Object>} response - HTTP response from sign-up endpoint.
+     * @returns {SignUpResource|null} Parsed resource when the response is successful; otherwise null.
      */
     static toResourceFromResponse(response) {
         if (response.status !== 200) {

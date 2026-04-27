@@ -1,17 +1,14 @@
 import {SignInResource} from "./sign-in.resource.js";
 
 /**
+ * Maps authentication endpoint responses into IAM infrastructure resources.
+ *
  * @class SignInAssembler
- * @summary Assembler for converting sign-in API responses to resources.
  */
 export class SignInAssembler {
     /**
-     * @static
-     * @param {Object} response - The API response object.
-     * @param {number} response.status - The HTTP status code.
-     * @param {string} response.statusText - The status text.
-     * @param {Object} response.data - The response data.
-     * @returns {SignInResource|null} The assembled SignInResource or null if error.
+     * @param {import('axios').AxiosResponse<Object>} response - HTTP response from sign-in endpoint.
+     * @returns {SignInResource|null} Parsed resource when the response is successful; otherwise null.
      */
     static toResourceFromResponse(response) {
         console.log(response);

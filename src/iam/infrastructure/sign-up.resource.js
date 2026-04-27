@@ -1,10 +1,12 @@
 /**
+ * Infrastructure resource returned after user registration.
+ *
  * @class SignUpResource
- * @summary Resource representing sign-up response data.
  */
 export class SignUpResource {
     /**
-     * @param {string} message - The response message.
+     * @param {Object} params - Resource payload.
+     * @param {string} params.message - Outcome message from the registration endpoint.
      */
     constructor({message}) {
         this.message = message;
