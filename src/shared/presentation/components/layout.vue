@@ -4,7 +4,8 @@ import LanguageSwitcher from "./language-switcher.vue";
 import {ref} from "vue";
 import {useI18n} from "vue-i18n";
 import FooterContent from "./footer-content.vue";
-import AuthenticationSection from "../../../iam/presentation/components/authentication-section.vue";
+// To import when IAM is implemented
+// import AuthenticationSection from "../../../iam/presentation/components/authentication-section.vue";
 const { t } = useI18n();
 
 const drawer = ref(false);
