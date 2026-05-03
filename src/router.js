@@ -1,7 +1,7 @@
 import {createRouter, createWebHistory} from "vue-router";
 import Home from "./shared/presentation/views/home.vue";
 import publishingRoutes from "./publishing/presentation/publishing-routes.js";
-// To import when IAM is implemented
+// To import when IAM is implemented,
 // import iamRoutes from "./iam/presentation/iam-routes.js";
 
 // Define lazy-loaded components for routes
@@ -47,7 +47,7 @@ router.beforeEach((to, from, next) => {
     // Set the page title
     let baseTitle = 'ACME Learning Center';
     document.title = `${baseTitle} - ${to.meta['title']}`;
-    // When IAM is implemented use:
+    // When IAM is implemented, use:
     // return authenticationGuard(to, from, next);
     // if not, use:
     return next();

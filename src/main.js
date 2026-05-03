@@ -2,10 +2,10 @@ import { createApp } from 'vue'
 import './style.css'
 import App from './app.vue'
 import i18n from "./i18n.js";
+import PrimeVue from 'primevue/config';
+import Material from '@primeuix/themes/material';
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
-import Material from '@primeuix/themes/material';
-import PrimeVue from 'primevue/config';
 import {
     Button,
     Card,
@@ -29,8 +29,8 @@ import {
     Select,
     SelectButton,
     Tag,
-    Textarea,
     Toast,
+    Textarea,
     ToastService,
     Toolbar,
     Tooltip
