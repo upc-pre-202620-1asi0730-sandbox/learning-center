@@ -2,26 +2,39 @@
   "name": "learning-center",
   "private": true,
   "version": "1.0.0",
+  "description": "ACME Learning Center is web platform for learning and development. It is mented to illustrate Domain-Driven Design (DDD) principles. It is built with Vue, Axios, Vite, Pinia, PrimeVue, with JavaScript.",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
+  "keywords": [
+    "vue",
+    "vite",
+    "pinia",
+    "primevue",
+    "primeflex",
+    "primeicons",
+    "axios",
+    "json-server",
+    "domain-driven-design",
+    "learning-center"
+  ],
   "dependencies": {
-    "@primeuix/themes": "^2.0.3",
-    "axios": "^1.15.2",
-    "pinia": "^3.0.4",
+    "@primeuix/themes": "^3.0.1",
+    "axios": "^1.20.0",
+    "pinia": "^4.0.3",
     "primeflex": "^4.0.0",
-    "primeicons": "^7.0.0",
-    "primevue": "^4.5.5",
-    "vue": "^3.5.33",
-    "vue-i18n": "^11.4.0",
-    "vue-router": "^5.0.6"
+    "primeicons": "^8.0.1",
+    "primevue": "^5.0.1",
+    "vue": "^3.5.43",
+    "vue-i18n": "^11.4.12",
+    "vue-router": "^5.3.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.6",
+    "@vitejs/plugin-vue": "^6.0.9",
     "json-server": "^0.17.4",
-    "vite": "^8.0.10"
+    "vite": "^8.3.0"
   }
 }
