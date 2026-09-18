@@ -150,6 +150,8 @@ Tip: if your API is running on a different port, update `VITE_LEARNING_PLATFORM_
   - `docs/class-diagram.puml`
   - `docs/user-stories.md`
   - `docs/adrs.md`
+- Project history and release notes:
+  - `CHANGELOG.md`
 
 ## Recommended Development Practices
 - Keep each feature inside its bounded context first; move to `shared` only when truly cross-context.
