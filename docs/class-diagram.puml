@@ -1,13 +1,13 @@
 @startuml
 package "Publishing Bounded Context" as publishing {
     package "Domain" as publishing_domain {
-        class Category <<resource>> {
+        class Category <<entity>> {
             - id: Number|null
             - name: string
             + constructor(id, name)
         }
 
-        class Tutorial <<resource>> {
+        class Tutorial <<entity>> {
             - id: Number|null
             - title: string
             - summary: string
@@ -37,12 +37,12 @@ package "Publishing Bounded Context" as publishing {
             + getCategories(): Promise
             + getCategoryById(id): Promise
             + createCategory(resource): Promise
-            + updateCategory(id, resource): Promise
+            + updateCategory(resource): Promise
             + deleteCategory(id): Promise
             + getTutorials(): Promise
             + getTutorialById(id): Promise
             + createTutorial(resource): Promise
-            + updateTutorial(id, resource): Promise
+            + updateTutorial(resource): Promise
             + deleteTutorial(id): Promise
         }
 
@@ -61,12 +61,14 @@ package "Publishing Bounded Context" as publishing {
             + tutorialsCount: computed
             + fetchCategories()
             + fetchTutorials()
+            + getCategoryById(id): Category
             + addCategory(category)
             + updateCategory(category)
-            + deleteCategory(id)
+            + deleteCategory(category)
+            + getTutorialById(id): Tutorial
             + addTutorial(tutorial)
             + updateTutorial(tutorial)
-            + deleteTutorial(id)
+            + deleteTutorial(tutorial)
         }
 
         PublishingStore --> PublishingApi
@@ -142,6 +144,138 @@ package "Publishing Bounded Context" as publishing {
     }
 }
 
+package "IAM Bounded Context" as iam {
+    package "Domain" as iam_domain {
+        class User <<entity>> {
+            - id: string|number
+            - username: string
+            + constructor(id, username)
+        }
+
+        class SignInCommand <<command>> {
+            - username: string
+            - password: string
+            + constructor(username, password)
+        }
+
+        class SignUpCommand <<command>> {
+            - username: string
+            - password: string
+            + constructor(username, password)
+        }
+    }
+
+    package "Infrastructure" as iam_infrastructure {
+        class SignInResource <<resource>> {
+            - id: string|number
+            - username: string
+            - token: string
+            + constructor(id, username, token)
+        }
+
+        class SignUpResource <<resource>> {
+            - message: string
+            + constructor(message)
+        }
+
+        class UserAssembler <<assembler>> {
+            + {static} toEntityFromResource(resource): User
+            + {static} toEntitiesFromResponse(response): User[]
+        }
+
+        class SignInAssembler <<assembler>> {
+            + {static} toResourceFromResponse(response): SignInResource
+        }
+
+        class SignUpAssembler <<assembler>> {
+            + {static} toResourceFromResponse(response): SignUpResource
+        }
+
+        class IamApi {
+            - signInEndpoint: BaseEndpoint
+            - signUpEndpoint: BaseEndpoint
+            - usersEndpoint: BaseEndpoint
+            + constructor()
+            + signIn(signInRequest): Promise
+            + signUp(signUpRequest): Promise
+            + getUsers(): Promise
+        }
+
+        class authenticationGuard <<guard>> {
+            + {static} authenticationGuard(to, from): object|boolean
+        }
+
+        class iamInterceptor <<interceptor>> {
+            + {static} iamInterceptor(config): AxiosRequestConfig
+        }
+
+        IamApi ..|> BaseApi
+        IamApi --> BaseEndpoint
+        authenticationGuard --> IamStore
+        iamInterceptor --> IamStore
+    }
+
+    package "Application" as iam_application {
+        class IamStore <<store>> {
+            - users: User[]
+            - errors: any[]
+            - usersLoaded: boolean
+            - isSignedIn: boolean
+            - currentUsername: string|null
+            - currentUserId: number|null
+            + currentToken: computed
+            + signIn(signInCommand, router)
+            + signUp(signUpCommand, router)
+            + signOut()
+            + fetchUsers()
+        }
+
+        IamStore --> IamApi
+        IamStore --> SignInAssembler
+        IamStore --> SignUpAssembler
+        IamStore --> UserAssembler
+    }
+
+    package "Presentation" as iam_presentation {
+        package "Components" as iam_components {
+            class AuthenticationSection <<component>> {
+                - router: Router
+                - store: IamStore
+                - signOut: function
+                - isSignedIn: computed
+                - currentUsername: computed
+                + performSignIn()
+                + performSignUp()
+                + performSignOut()
+            }
+        }
+
+        package "Views" as iam_views {
+            class SignInForm <<component>> {
+                - router: Router
+                - store: IamStore
+                - signIn: function
+                - form: object
+                + performSignIn()
+            }
+
+            class SignUpForm <<component>> {
+                - router: Router
+                - store: IamStore
+                - signUp: function
+                - form: object
+                + performSignUp()
+            }
+        }
+
+        AuthenticationSection --> IamStore
+        SignInForm --> IamStore
+        SignInForm --> SignInCommand
+        SignUpForm --> IamStore
+        SignUpForm --> SignUpCommand
+    }
+}
+
 package "Shared Bounded Context" as shared {
     package "Infrastructure" as shared_infrastructure {
         class BaseApi {
@@ -162,6 +296,7 @@ package "Shared Bounded Context" as shared {
         }
 
         BaseEndpoint --> BaseApi
+        BaseApi ..> iamInterceptor
     }
 
     package "Presentation" as shared_presentation {
@@ -194,7 +329,7 @@ package "Shared Bounded Context" as shared {
             }
 
             class PageNotFound <<component>> {
-                - router: Router
+                - route: Route
                 - unavailableRoute: string
                 - t: function
             }

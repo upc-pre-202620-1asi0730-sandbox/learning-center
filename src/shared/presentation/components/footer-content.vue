@@ -1,24 +1,27 @@
 <script setup>
-  import {useI18n} from "vue-i18n";
+import { useI18n } from "vue-i18n";
 
-  const { t } = useI18n();
+const { t } = useI18n();
 </script>
 
 <template>
-  <div class="grid bg-primary mt-4 p-2 align-content-start">
-    <div class="col-12 ml-3 align-items-center justify-content-center">
-      <p>Copyright &copy; 2025. ACME Studios</p>
-    </div>
-    <div  class="col-12 ml-3 mt-1 align-items-center justify-content-center">
-      <p>
-        {{ t('authoring-phrase.intro') }} <i class="pi pi-heart"/>
-        {{ t('authoring-phrase.use') }} <a href="https://primevue.org/" target="_blank">PrimeVue</a>
-        {{ t('authoring-phrase.author', {brand: 'ACME'}) }}
+  <footer class="absolute bottom-0 left-0 w-full border-none bg-primary mt-4 border-round-md shadow-1 p-3">
+    <div class="flex flex-column align-items-center justify-content-center gap-2 text-center text-white">
+      <p class="m-0 text-sm font-medium">Copyright &copy; 2026. ACME Studios</p>
+      <p class="m-0 text-sm line-height-3">
+        {{ t('authoring-phrase.intro') }}
+        <i class="pi pi-heart text-pink-300" aria-hidden="true"/>
+        {{ t('authoring-phrase.use') }}
+        <a
+          href="https://primevue.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-white font-bold no-underline hover:text-blue-100"
+        >
+          PrimeVue
+        </a>
+        {{ t('authoring-phrase.author', { brand: 'ACME' }) }}
       </p>
     </div>
-  </div>
+  </footer>
 </template>
-
-<style scoped>
-
-</style>

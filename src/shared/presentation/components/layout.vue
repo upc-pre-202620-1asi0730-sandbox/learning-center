@@ -4,8 +4,8 @@ import LanguageSwitcher from "./language-switcher.vue";
 import {ref} from "vue";
 import {useI18n} from "vue-i18n";
 import FooterContent from "./footer-content.vue";
-// To import when IAM is implemented
-import AuthenticationSection from "../../../iam/presentation/components/authentication-section.vue";
+// To import when IAM is implemented:
+// import AuthenticationSection from "../../../iam/presentation/components/authentication-section.vue";
 const { t } = useI18n();
 
 const drawer = ref(false);
@@ -26,14 +26,11 @@ const items = [
 <template>
   <pv-toast/>
   <pv-confirm-dialog/>
-  <div class="header">
+  <header class="absolute top-0 left-0 w-full">
     <pv-toolbar class="bg-primary">
       <template #start>
         <pv-button class="p-button-text" icon="pi pi-bars" @click="toggleDrawer"/>
         <h3>ACME Learning Center</h3>
-      </template>
-      <template #center>
-
       </template>
       <template #end>
         <div class="flex-column mr-3">
@@ -42,37 +39,14 @@ const items = [
           </pv-button>
         </div>
         <!-- To add when IAM is implemented -->
-        <authentication-section/>
+        <!--<authentication-section/>-->
         <language-switcher/>
       </template>
     </pv-toolbar>
     <pv-drawer v-model:visible="drawer"/>
-  </div>
-  <div class="main-content">
+  </header>
+  <main class="mt-7">
     <router-view/>
-  </div>
-  <div class="footer">
-    <footer-content/>
-  </div>
+  </main>
+  <footer-content/>
 </template>
-
-<style scoped>
-.header {
-  position: absolute;
-  left: 0;
-  top:0;
-  width:100%;
-}
-
-.main-content {
-  margin-top: 60px;
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 10px;
-}
-</style>

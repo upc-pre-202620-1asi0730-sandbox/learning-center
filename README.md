@@ -149,6 +149,7 @@ Tip: if your API is running on a different port, update `VITE_LEARNING_PLATFORM_
 - Domain and architecture references:
   - `docs/class-diagram.puml`
   - `docs/user-stories.md`
+  - `docs/adrs.md`
 
 ## Recommended Development Practices
 - Keep each feature inside its bounded context first; move to `shared` only when truly cross-context.
