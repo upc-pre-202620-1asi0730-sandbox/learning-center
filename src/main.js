@@ -6,6 +6,7 @@ import PrimeVue from 'primevue/config';
 import Material from '@primeuix/themes/material';
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
+import Tooltip from 'primevue/tooltip';
 import {
     Button,
     Card,
@@ -32,16 +33,17 @@ import {
     Toast,
     Textarea,
     ToastService,
-    Toolbar,
-    Tooltip
+    Toolbar
 } from "primevue";
 import router from "./router.js";
 import pinia from "./pinia.js";
 
+const primeUiLicenseKey = import.meta.env.VITE_PRIME_UI_LICENSE_KEY;
+
 // noinspection JSCheckFunctionSignatures
 createApp(App)
     .use(i18n)
-    .use(PrimeVue, {theme: { preset: Material}, ripple: true})
+    .use(PrimeVue, {theme: { preset: Material}, ripple: true, license: primeUiLicenseKey})
     .use(ConfirmationService)
     .use(DialogService)
     .use(ToastService)
