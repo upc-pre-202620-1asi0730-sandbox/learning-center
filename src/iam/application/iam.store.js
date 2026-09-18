@@ -10,7 +10,7 @@ import {SignUpCommand} from "../domain/sign-up.command.js";
 const iamApi = new IamApi();
 /**
  * Application service store for the IAM bounded context.
- * It coordinates authentication commands and exposes UI-facing auth state.
+ * It coordinates authentication commands and exposes the UI-facing auth state.
  *
  * @returns {Object} Store state and actions.
  */
@@ -31,9 +31,9 @@ const useIamStore = defineStore('iam', () => {
     const currentToken = computed(() => isSignedIn.value ? localStorage.getItem('token') : null);
 
     /**
-     * Executes the sign-in use case and updates authentication state.
+     * Executes the sign-in use case and updates the authentication state.
      * @param {SignInCommand} signInCommand - Sign-in command.
-     * @param {import('vue-router').Router} router - Router used to redirect on result.
+     * @param {import('vue-router').Router} router - Router used to redirect on a result.
      * @returns {void}
      */
     function signIn(signInCommand, router) {
@@ -71,7 +71,7 @@ const useIamStore = defineStore('iam', () => {
     /**
      * Executes the sign-up use case and routes the user to the next screen.
      * @param {SignUpCommand} signUpCommand - Sign-up command.
-     * @param {import('vue-router').Router} router - Router used to redirect on result.
+     * @param {import('vue-router').Router} router - Router used to redirect on a result.
      * @returns {void}
      */
     function signUp(signUpCommand, router) {
