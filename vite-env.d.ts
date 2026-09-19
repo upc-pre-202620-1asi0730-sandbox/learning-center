@@ -9,11 +9,11 @@
 interface ImportMetaEnv {
   readonly VITE_LEARNING_PLATFORM_API_URL: string;
   /**
-   * # VITE_CATEGORIES_ENDPOINT_PATH is the path to the categories endpoint.
+   * # VITE_CATEGORIES_ENDPOINT_PATH is the path to the categories' endpoint.
    */
   readonly VITE_CATEGORIES_ENDPOINT_PATH: string;
   /**
-   * # VITE_TUTORIALS_ENDPOINT_PATH is the path to the tutorials endpoint.
+   * # VITE_TUTORIALS_ENDPOINT_PATH is the path to the tutorials' endpoint.
    */
   readonly VITE_TUTORIALS_ENDPOINT_PATH: string;
   /**
@@ -25,7 +25,7 @@ interface ImportMetaEnv {
    */
   readonly VITE_SIGNIN_ENDPOINT_PATH: string;
   /**
-   * # VITE_USERS_ENDPOINT_PATH is the path to the users endpoint.
+   * # VITE_USERS_ENDPOINT_PATH is the path to the users' endpoint.
    */
   readonly VITE_USERS_ENDPOINT_PATH: string;
   /**
