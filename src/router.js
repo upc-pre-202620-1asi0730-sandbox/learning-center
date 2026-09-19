@@ -50,7 +50,7 @@ router.beforeEach((to, from) => {
     // When IAM is implemented, use:
     // return authenticationGuard(to, from);
     // if not, use:
-    //return true;
+    return true;
 });
 
 export default router;
